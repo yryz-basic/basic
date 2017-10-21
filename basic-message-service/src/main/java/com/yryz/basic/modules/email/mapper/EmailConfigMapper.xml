@@ -1,45 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.yryz.basic.modules.email.dao.EmailConfigMapper" >
+<mapper namespace="com.yryz.basic.modules.email.dao.EmailConfigDao" >
 
   <sql id="Base_Column_List" >
-    id, trans_code, send_info, host, auth, receiverList, subject, type_model, email_model, email_flag,
+    id, email_code, send_info, receiverList, subject, type_model, email_model, email_flag,
     del_flag, create_date, create_user_id, last_update_date, last_update_user_id, revision
   </sql>
 
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultType="com.yryz.basic.modules.email.EmailConfig" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultType="com.yryz.basic.modules.email.vo.EmailConfigVo" >
     select 
     <include refid="Base_Column_List" />
     from basic_email_config
     where id = #{id,jdbcType=BIGINT}
   </select>
 
-  <insert id="insert" parameterType="com.yryz.basic.modules.email.EmailConfig" >
-    insert into basic_email_config (id, trans_code, host, 
-      auth, receiverList, subject, 
+  <select id="selectByConditions" parameterType="com.yryz.basic.modules.email.dto.EmailConfigDto"
+          resultType="com.yryz.basic.modules.email.vo.EmailConfigVo">
+    select
+    <include refid="Base_Column_List" />
+    from basic_email_config
+    where del_flag = 0
+    <if test="emailCode != null and emailCode != ''">
+      and email_code = #{emailCode,jdbcType=VARCHAR}
+    </if>
+    order by create_date desc, id desc
+  </select>
+
+  <insert id="insert" parameterType="com.yryz.basic.modules.email.entity.EmailConfig" >
+    insert into basic_email_config (id, email_code, receiverList, subject,
       type_model, email_model, email_flag, 
       del_flag, create_date, create_user_id, 
       last_update_date, last_update_user_id, revision, 
       send_info)
-    values (#{id,jdbcType=BIGINT}, #{transCode,jdbcType=VARCHAR}, #{host,jdbcType=VARCHAR}, 
-      #{auth,jdbcType=VARCHAR}, #{receiverlist,jdbcType=VARCHAR}, #{subject,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{emailCode,jdbcType=VARCHAR}, #{receiverlist,jdbcType=VARCHAR}, #{subject,jdbcType=VARCHAR},
       #{typeModel,jdbcType=VARCHAR}, #{emailModel,jdbcType=VARCHAR}, #{emailFlag,jdbcType=TINYINT}, 
       #{delFlag,jdbcType=TINYINT}, #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR}, 
       #{lastUpdateDate,jdbcType=TIMESTAMP}, #{lastUpdateUserId,jdbcType=VARCHAR}, #{revision,jdbcType=INTEGER}, 
       #{sendInfo,jdbcType=VARCHAR})
   </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.yryz.basic.modules.email.EmailConfig" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.yryz.basic.modules.email.entity.EmailConfig" >
     update basic_email_config
     <set >
-      <if test="transCode != null" >
-        trans_code = #{transCode,jdbcType=VARCHAR},
-      </if>
-      <if test="host != null" >
-        host = #{host,jdbcType=VARCHAR},
-      </if>
-      <if test="auth != null" >
-        auth = #{auth,jdbcType=VARCHAR},
+      <if test="emailCode != null" >
+        email_code = #{emailCode,jdbcType=VARCHAR},
       </if>
       <if test="receiverlist != null" >
         receiverList = #{receiverlist,jdbcType=VARCHAR},

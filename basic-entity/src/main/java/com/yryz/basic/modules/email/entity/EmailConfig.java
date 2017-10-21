@@ -1,14 +1,10 @@
-package com.yryz.basic.modules.email;
+package com.yryz.basic.modules.email.entity;
 
 import com.yryz.basic.common.entity.GenericEntity;
 
 public class EmailConfig extends GenericEntity {
 
-    private String transCode;
-
-    private String host;
-
-    private String auth;
+    private String emailCode;
 
     private String receiverlist;
 
@@ -24,28 +20,12 @@ public class EmailConfig extends GenericEntity {
 
     private String sendInfo;
 
-    public String getTransCode() {
-        return transCode;
+    public String getEmailCode() {
+        return emailCode;
     }
 
-    public void setTransCode(String transCode) {
-        this.transCode = transCode == null ? null : transCode.trim();
-    }
-
-    public String getHost() {
-        return host;
-    }
-
-    public void setHost(String host) {
-        this.host = host == null ? null : host.trim();
-    }
-
-    public String getAuth() {
-        return auth;
-    }
-
-    public void setAuth(String auth) {
-        this.auth = auth == null ? null : auth.trim();
+    public void setEmailCode(String emailCode) {
+        this.emailCode = emailCode;
     }
 
     public String getReceiverlist() {

@@ -1,7 +1,10 @@
 package com.yryz.basic.modules.email.service;
 
+import com.yryz.basic.common.entity.PageList;
 import com.yryz.basic.modules.email.dao.EmailConfigDao;
-import com.yryz.basic.modules.email.EmailConfig;
+import com.yryz.basic.modules.email.dto.EmailConfigDto;
+import com.yryz.basic.modules.email.entity.EmailConfig;
+import com.yryz.basic.modules.email.vo.EmailConfigVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +19,17 @@ public class EmailConfigService {
      * @param   id
      * @return
      * */
-    public EmailConfig detail(Long id) {
+    public EmailConfigVo detail(Long id) {
         return emailConfigDao.selectByPrimaryKey(id);
+    }
+
+    /**
+     * 获取邮件配置列表
+     * @param   emailConfigDto
+     * @return
+     * */
+    public PageList<EmailConfigVo> selectByConditions(EmailConfigDto emailConfigDto) {
+        return new PageList<EmailConfigVo>(emailConfigDao.selectByConditions(emailConfigDto));
     }
 
     /**

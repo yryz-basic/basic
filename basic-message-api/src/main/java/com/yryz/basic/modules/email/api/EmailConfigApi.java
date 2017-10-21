@@ -1,6 +1,9 @@
 package com.yryz.basic.modules.email.api;
 
-import com.yryz.basic.modules.email.EmailConfig;
+import com.yryz.basic.common.entity.PageList;
+import com.yryz.basic.modules.email.dto.EmailConfigDto;
+import com.yryz.basic.modules.email.entity.EmailConfig;
+import com.yryz.basic.modules.email.vo.EmailConfigVo;
 
 public interface EmailConfigApi {
 
@@ -9,7 +12,14 @@ public interface EmailConfigApi {
      * @param   id
      * @return
      * */
-    EmailConfig detail(Long id);
+    EmailConfigVo detail(Long id);
+
+    /**
+     * 获取邮件配置列表
+     * @param   emailConfigDto
+     * @return
+     * */
+    PageList<EmailConfigVo> list(EmailConfigDto emailConfigDto);
 
     /**
      * 新增邮件配置信息

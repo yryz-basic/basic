@@ -1,8 +1,11 @@
 package com.yryz.basic.modules.email.manager;
 
 
-import com.yryz.basic.modules.email.EmailConfig;
+import com.yryz.basic.common.entity.PageList;
+import com.yryz.basic.modules.email.dto.EmailConfigDto;
+import com.yryz.basic.modules.email.entity.EmailConfig;
 import com.yryz.basic.modules.email.service.EmailConfigService;
+import com.yryz.basic.modules.email.vo.EmailConfigVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,8 +22,17 @@ public class EmailConfigManager {
      * @param   id
      * @return
      * */
-    public EmailConfig detail(Long id) {
+    public EmailConfigVo detail(Long id) {
         return emailConfigService.detail(id);
+    }
+
+    /**
+     * 获取邮件配置列表
+     * @param   emailConfigDto
+     * @return
+     * */
+    public PageList<EmailConfigVo> selectByConditions(EmailConfigDto emailConfigDto) {
+        return emailConfigService.selectByConditions(emailConfigDto);
     }
 
     /**

@@ -1,8 +1,11 @@
 package com.yryz.basic.modules.email.provider;
 
-import com.yryz.basic.modules.email.EmailConfig;
+import com.yryz.basic.common.entity.PageList;
 import com.yryz.basic.modules.email.api.EmailConfigApi;
+import com.yryz.basic.modules.email.dto.EmailConfigDto;
+import com.yryz.basic.modules.email.entity.EmailConfig;
 import com.yryz.basic.modules.email.manager.EmailConfigManager;
+import com.yryz.basic.modules.email.vo.EmailConfigVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +20,17 @@ public class EmailConfigProvider implements EmailConfigApi {
      * @param   id
      * @return
      * */
-    public EmailConfig detail(Long id) {
+    public EmailConfigVo detail(Long id) {
         return emailConfigManager.detail(id);
+    }
+
+    /**
+     * 获取邮件配置列表
+     * @param   emailConfigDto
+     * @return
+     * */
+    public PageList<EmailConfigVo> list(EmailConfigDto emailConfigDto) {
+        return emailConfigManager.selectByConditions(emailConfigDto);
     }
 
     /**
