@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yryz.basic.modules.email.dao.EmailSendDao" >
+
+  <sql id="Base_Column_List" >
+    id, account, password, host, auth, del_flag, create_date, create_user_id, last_update_date,
+    last_update_user_id
+  </sql>
+
+  <select id="selectByPrimaryKey" resultType="com.yryz.basic.modules.email.vo.EmailSendVo" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from basic_email_send
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <select id="selectByConditions" resultType="com.yryz.basic.modules.email.vo.EmailSendVo"
+          parameterType="com.yryz.basic.modules.email.dto.EmailSendDto">
+    select
+    <include refid="Base_Column_List" />
+    from basic_email_send
+    <trim prefix="where" prefixOverrides="AND |OR">
+      del_flag = 0
+      <if test="account != null and account != ''">
+        and account = #{account,jdbcType=VARCHAR}
+      </if>
+      <if test="accountSearch != null and accountSearch != ''">
+        and account like concat('%',#{accountSearch, jdbcType=VARCHAR},'%')
+      </if>
+    </trim>
+    order by create_date desc, id desc
+  </select>
+
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.yryz.basic.modules.email.entity.EmailSend" >
+    insert into basic_email_send (account, password,
+      host, auth,
+      create_user_id, last_update_user_id
+      )
+    values (#{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{host,jdbcType=VARCHAR}, #{auth,jdbcType=VARCHAR},
+      #{createUserId,jdbcType=VARCHAR}, #{lastUpdateUserId,jdbcType=VARCHAR}
+      )
+  </insert>
+
+  <update id="update" parameterType="com.yryz.basic.modules.email.entity.EmailSend" >
+    update basic_email_send
+    <set >
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="host != null" >
+        host = #{host,jdbcType=VARCHAR},
+      </if>
+      <if test="auth != null" >
+        auth = #{auth,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag, jdbcType=TINYINT},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateDate != null" >
+        last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateUserId != null" >
+        last_update_user_id = #{lastUpdateUserId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <delete id="delete" parameterType="java.lang.Long" >
+    delete from basic_email_send
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+</mapper>

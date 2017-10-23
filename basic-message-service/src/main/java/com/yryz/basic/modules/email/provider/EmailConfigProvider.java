@@ -8,6 +8,9 @@ import com.yryz.basic.modules.email.manager.EmailConfigManager;
 import com.yryz.basic.modules.email.vo.EmailConfigVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
+import java.util.List;
 
 @Service
 public class EmailConfigProvider implements EmailConfigApi {
@@ -30,7 +33,19 @@ public class EmailConfigProvider implements EmailConfigApi {
      * @return
      * */
     public PageList<EmailConfigVo> list(EmailConfigDto emailConfigDto) {
-        return emailConfigManager.selectByConditions(emailConfigDto);
+        return emailConfigManager.list(emailConfigDto);
+    }
+
+    /**
+     * 判断emailCode是否存在
+     * @param   emailCode
+     * @return
+     * */
+    public Boolean emailCodeExist(String emailCode) {
+        EmailConfigDto emailConfigDto = new EmailConfigDto();
+        emailConfigDto.setEmailCode(emailCode);
+        List<EmailConfigVo> list = emailConfigManager.emailConfigList(emailConfigDto);
+        return CollectionUtils.isEmpty(list) ? true : false;
     }
 
     /**

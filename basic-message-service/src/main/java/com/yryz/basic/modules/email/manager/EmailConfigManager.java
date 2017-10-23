@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class EmailConfigManager {
@@ -31,8 +33,17 @@ public class EmailConfigManager {
      * @param   emailConfigDto
      * @return
      * */
-    public PageList<EmailConfigVo> selectByConditions(EmailConfigDto emailConfigDto) {
-        return emailConfigService.selectByConditions(emailConfigDto);
+    public PageList<EmailConfigVo> list(EmailConfigDto emailConfigDto) {
+        return emailConfigService.list(emailConfigDto);
+    }
+
+    /**
+     * 获取邮件配置列表（不分页）
+     * @param   emailConfigDto
+     * @return
+     * */
+    public List<EmailConfigVo> emailConfigList(EmailConfigDto emailConfigDto) {
+        return emailConfigService.emailConfigList(emailConfigDto);
     }
 
     /**

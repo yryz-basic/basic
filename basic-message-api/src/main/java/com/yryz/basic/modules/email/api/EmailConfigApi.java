@@ -22,6 +22,13 @@ public interface EmailConfigApi {
     PageList<EmailConfigVo> list(EmailConfigDto emailConfigDto);
 
     /**
+     * 判断emailCode是否存在
+     * @param   emailCode
+     * @return
+     * */
+    Boolean emailCodeExist(String emailCode);
+
+    /**
      * 新增邮件配置信息
      * @param   emailConfig
      * */

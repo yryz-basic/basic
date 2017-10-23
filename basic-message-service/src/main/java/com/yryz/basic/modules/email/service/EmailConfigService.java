@@ -1,5 +1,6 @@
 package com.yryz.basic.modules.email.service;
 
+import com.github.pagehelper.PageHelper;
 import com.yryz.basic.common.entity.PageList;
 import com.yryz.basic.modules.email.dao.EmailConfigDao;
 import com.yryz.basic.modules.email.dto.EmailConfigDto;
@@ -7,6 +8,8 @@ import com.yryz.basic.modules.email.entity.EmailConfig;
 import com.yryz.basic.modules.email.vo.EmailConfigVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class EmailConfigService {
@@ -28,8 +31,18 @@ public class EmailConfigService {
      * @param   emailConfigDto
      * @return
      * */
-    public PageList<EmailConfigVo> selectByConditions(EmailConfigDto emailConfigDto) {
+    public PageList<EmailConfigVo> list(EmailConfigDto emailConfigDto) {
+        PageHelper.startPage(emailConfigDto.getPageNo(), emailConfigDto.getPageSize());
         return new PageList<EmailConfigVo>(emailConfigDao.selectByConditions(emailConfigDto));
+    }
+
+    /**
+     * 获取邮件配置列表（不分页）
+     * @param   emailConfigDto
+     * @return
+     * */
+    public List<EmailConfigVo> emailConfigList(EmailConfigDto emailConfigDto) {
+        return emailConfigDao.selectByConditions(emailConfigDto);
     }
 
     /**

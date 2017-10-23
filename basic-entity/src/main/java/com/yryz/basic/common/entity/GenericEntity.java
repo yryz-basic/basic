@@ -1,5 +1,6 @@
 package com.yryz.basic.common.entity;
 
+
 import java.io.Serializable;
 
 /**
