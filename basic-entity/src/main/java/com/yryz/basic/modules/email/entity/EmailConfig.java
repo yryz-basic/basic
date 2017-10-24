@@ -6,7 +6,7 @@ public class EmailConfig extends GenericEntity {
 
     private String emailCode;
 
-    private String receiverlist;
+    private String receiverList;
 
     private String subject;
 
@@ -28,12 +28,12 @@ public class EmailConfig extends GenericEntity {
         this.emailCode = emailCode;
     }
 
-    public String getReceiverlist() {
-        return receiverlist;
+    public String getReceiverList() {
+        return receiverList;
     }
 
-    public void setReceiverlist(String receiverlist) {
-        this.receiverlist = receiverlist == null ? null : receiverlist.trim();
+    public void setReceiverList(String receiverList) {
+        this.receiverList = receiverList;
     }
 
     public String getSubject() {

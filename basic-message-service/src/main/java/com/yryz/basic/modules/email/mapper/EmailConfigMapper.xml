@@ -3,7 +3,7 @@
 <mapper namespace="com.yryz.basic.modules.email.dao.EmailConfigDao" >
 
   <sql id="Base_Column_List" >
-    id, email_code, send_info, receiverList, subject, type_model, email_model, email_flag,
+    id, email_code, send_info, receiver_list, subject, type_model, email_model, email_flag,
     del_flag, create_date, create_user_id, last_update_date, last_update_user_id, revision
   </sql>
 
@@ -27,11 +27,11 @@
   </select>
 
   <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id"  parameterType="com.yryz.basic.modules.email.entity.EmailConfig" >
-    insert into basic_email_config (email_code, receiverList, subject,
+    insert into basic_email_config (email_code, receiver_list, subject,
       type_model, email_model, email_flag, create_user_id,
       last_update_user_id, revision,
       send_info)
-    values (#{emailCode,jdbcType=VARCHAR}, #{receiverlist,jdbcType=VARCHAR}, #{subject,jdbcType=VARCHAR},
+    values (#{emailCode,jdbcType=VARCHAR}, #{receiverList,jdbcType=VARCHAR}, #{subject,jdbcType=VARCHAR},
       #{typeModel,jdbcType=VARCHAR}, #{emailModel,jdbcType=VARCHAR}, #{emailFlag,jdbcType=TINYINT}, 
       #{createUserId,jdbcType=VARCHAR}, #{lastUpdateUserId,jdbcType=VARCHAR}, #{revision,jdbcType=INTEGER},
       #{sendInfo,jdbcType=VARCHAR})
@@ -43,8 +43,8 @@
       <if test="emailCode != null" >
         email_code = #{emailCode,jdbcType=VARCHAR},
       </if>
-      <if test="receiverlist != null" >
-        receiverList = #{receiverlist,jdbcType=VARCHAR},
+      <if test="receiverList != null" >
+        receiver_list = #{receiverList,jdbcType=VARCHAR},
       </if>
       <if test="subject != null" >
         subject = #{subject,jdbcType=VARCHAR},
