@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.yryz.basic</groupId>
@@ -14,6 +15,9 @@
         <module>basic-message-api</module>
         <module>basic-message-service</module>
         <module>basic-message-web</module>
+        <module>basic-id-api</module>
+        <module>basic-id-service</module>
+        <module>basic-id-web</module>
     </modules>
 
     <properties>
@@ -66,13 +70,13 @@
 
         <jsoup.version>1.8.1</jsoup.version>
         <com.google.code.gson.version>2.4</com.google.code.gson.version>
-        
+
         <basic.version>1.0.0-SNAPSHOT</basic.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-        	
+
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>dubbo</artifactId>
@@ -159,12 +163,18 @@
                 <artifactId>spring-context-support</artifactId>
                 <version>${spring.version}</version>
             </dependency>
-            
+
             <dependency>
-							<groupId>org.springframework</groupId>
-							<artifactId>spring-aop</artifactId>
-							<version>${spring.version}</version>
-						</dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
             <!-- srping end -->
 
 
@@ -283,7 +293,7 @@
                 <version>${slf4j.version}</version>
                 <scope>runtime</scope>
             </dependency>
-           
+
             <!-- JSON setting -->
             <dependency>
                 <groupId>com.alibaba</groupId>
@@ -383,12 +393,12 @@
                 <version>${guava.version}</version>
             </dependency>
 
-						<dependency>
+            <dependency>
                 <groupId>org.aspectj</groupId>
                 <artifactId>aspectjrt</artifactId>
                 <version>${aspectj.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.aspectj</groupId>
                 <artifactId>aspectjweaver</artifactId>
@@ -409,10 +419,10 @@
             </dependency>-->
 
             <dependency>
-					    <groupId>org.jsoup</groupId>
-					    <artifactId>jsoup</artifactId>
-					    <version>${jsoup.version}</version>
-						</dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>${jsoup.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>com.google.code.gson</groupId>
